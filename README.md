@@ -1,2 +1,6 @@
-# 概要
-自分用のテンプレート置き場
+npx create-next-app sample-app --use-npm --typescript
+
+Tailwind
+https://tailwindcss.com/docs/guides/nextjs
+
+

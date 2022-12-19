@@ -7,9 +7,7 @@ const Page2 = () => {
     <div data-theme='dark' className='flex flex-col min-h-screen'>
       <Header />
       <div className='grow container mx-auto my-4 px-4'>
-        <div>
-          hogehoge
-        </div>
+        <div>hogehoge</div>
         <div className='btn btn-primary'>
           <Link href='/'>link to home</Link>
         </div>

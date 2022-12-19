@@ -8,9 +8,7 @@ const Home: NextPage = () => {
     <div data-theme='light' className='flex flex-col min-h-screen'>
       <Header />
       <div className='grow container mx-auto my-4 px-4'>
-        <div>
-          hogehoge
-        </div>
+        <div>hogehoge</div>
         <div className='btn btn-primary'>
           <Link href='/page2'>link to page2</Link>
         </div>

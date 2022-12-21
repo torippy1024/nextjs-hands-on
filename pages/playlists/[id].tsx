@@ -3,18 +3,19 @@ import {signIn, signOut, useSession} from 'next-auth/react';
 import {useEffect, useState} from 'react';
 import Footer from '../../lib/components/Footer';
 import Header from '../../lib/components/Header';
-import SpotifyEmbedded from '../../lib/components/SpotifyEmbedded';
 import {SpotifyPlaylistType} from '../../lib/types/spotify/playlists';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {SpotifyAudioFeatureType} from '../../lib/types/spotify/audio-features';
+import {SpotifyAudioFeaturesType} from '../../lib/types/spotify/audio-features';
+import FeatureRadar from '../../lib/components/FeatureRadar';
+import IdsFeatureRadar from '../../lib/components/FeatureRadar/IdsFeatureRadar';
 
 const Home: NextPage = () => {
-  const {data: session, status} = useSession();
+  const {data: session} = useSession();
 
   const [playlist, setPlaylist] = useState<SpotifyPlaylistType>();
-  const [trackIds, setTrackIds] = useState<string[]>([]);
-  const [features, setFeatures] = useState<SpotifyAudioFeatureType[]>([]);
+  const [feats, setFeats] = useState<SpotifyAudioFeaturesType>();
+  const [ids, setIds] = useState<string[]>([]);
   const router = useRouter();
   const {id} = router.query;
 
@@ -37,18 +38,8 @@ const Home: NextPage = () => {
           } else {
             setPlaylist(data);
             const trackIds = getTrackIdsFromPlaylist(data);
-            setTrackIds(trackIds);
 
-            trackIds.slice(0, 10).map((trackId) => {
-              const featureUrl = `/api/spotify/audio-features/${trackId}`;
-              return fetch(`${featureUrl}?${query}`)
-                .then((res) => res.json())
-                .then((data) => {
-                  setFeatures((features) => {
-                    return [...features, data as SpotifyAudioFeatureType];
-                  });
-                });
-            });
+            setIds(trackIds);
           }
         });
     }
@@ -85,6 +76,14 @@ const Home: NextPage = () => {
               sign out
             </button>
             <div>
+              {ids && session && (
+                <div>
+                  <IdsFeatureRadar
+                    ids={ids}
+                    accessToken={session.token.accessToken as string}
+                  />
+                </div>
+              )}
               {playlist &&
                 playlist.tracks.items.map((item, index) => (
                   <div key={index}>
@@ -93,16 +92,6 @@ const Home: NextPage = () => {
                     </Link>
                   </div>
                 ))}
-              {/* {trackIds &&
-                trackIds.slice(0, 10).map((trackId, index) => (
-                  <div key={index}>
-                    <SpotifyEmbedded id={trackId} />
-                  </div>
-                ))} */}
-              {/* {features &&
-                features.map((feature, index) => (
-                  <div key={index}>{JSON.stringify(feature)}</div>
-                ))} */}
             </div>
           </div>
         )}

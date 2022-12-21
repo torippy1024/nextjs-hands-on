@@ -1,23 +1,27 @@
 import type {NextPage} from 'next';
-import Footer from '../lib/components/Footer';
-import Header from '../lib/components/Header';
 import {signIn, signOut, useSession} from 'next-auth/react';
 import {useEffect, useState} from 'react';
-import {SpotifyMePlaylistsItemType} from '../lib/types/spotify/me/playlists';
+import Footer from '../../lib/components/Footer';
+import Header from '../../lib/components/Header';
+import SpotifyEmbedded from '../../lib/components/SpotifyEmbedded';
+import {SpotifyPlaylistType} from '../../lib/types/spotify/playlists';
 import Link from 'next/link';
+import {SpotifyAudioFeatureType} from '../../lib/types/spotify/audio-features';
+import {useRouter} from 'next/router';
+import FeatureRadar from '../../lib/components/FeatureRadar';
 
 const Home: NextPage = () => {
   const {data: session, status} = useSession();
 
-  const [playlists, setPlaylists] = useState<SpotifyMePlaylistsItemType[]>([]);
+  const [audioFeature, setAudioFeature] = useState<SpotifyAudioFeatureType>();
+  const router = useRouter();
+  const {id} = router.query;
 
   useEffect(() => {
     if (session) {
-      const baseUrl = '/api/spotify/me/playlists';
+      const baseUrl = `/api/spotify/audio-features/${id}`;
       const params = {
         accessToken: session.token.accessToken as string,
-        page: '0',
-        limit: '30',
       };
       const query = new URLSearchParams(params);
       fetch(`${baseUrl}?${query}`)
@@ -26,11 +30,11 @@ const Home: NextPage = () => {
           if (data?.error) {
             console.log(data.error);
           } else {
-            setPlaylists(data);
+            setAudioFeature(data);
           }
         });
     }
-  }, [session]);
+  }, [session, id]);
 
   return (
     <div data-theme='light' className='flex flex-col min-h-screen'>
@@ -53,7 +57,6 @@ const Home: NextPage = () => {
         {session && (
           <div>
             <div>signed in as {session.user?.name}</div>
-            {session.token.accessToken}
             <button
               className='btn'
               onClick={(e) => {
@@ -63,15 +66,22 @@ const Home: NextPage = () => {
             >
               sign out
             </button>
+            {/* <div className=' whitespace-pre-wrap'>
+              {audioFeature && JSON.stringify(audioFeature, null, 2)}
+            </div> */}
             <div>
-              {playlists.map((playlist, index) => (
-                <div key={index}>
-                  <Link href={`/playlists/${playlist.id}`}>
-                    {playlist.name} | {playlist.id}
-                  </Link>
-                  {/* <img src={playlist.imageUrl} /> */}
+              {audioFeature && (
+                <div>
+                  <FeatureRadar
+                    acousticness={audioFeature.acousticness}
+                    danceability={audioFeature.danceability}
+                    energy={audioFeature.energy}
+                    liveness={audioFeature.liveness}
+                    speechiness={audioFeature.speechiness}
+                    valence={audioFeature.valence}
+                  />
                 </div>
-              ))}
+              )}
             </div>
           </div>
         )}

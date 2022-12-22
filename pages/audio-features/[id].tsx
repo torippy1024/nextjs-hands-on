@@ -7,6 +7,7 @@ import {useRouter} from 'next/router';
 import FeatureRadar from '../../lib/components/FeatureRadar';
 import SpotifyAudioFeatureType from '../../lib/types/spotify/audio-features';
 import validate from '../../lib/types/spotify/audio-features/index.validator';
+import SessionLayout from '../../lib/components/Layout/SessionLayout';
 
 const Home: NextPage = () => {
   const {data: session, status} = useSession();
@@ -32,61 +33,26 @@ const Home: NextPage = () => {
   }, [session, id]);
 
   return (
-    <div data-theme='light' className='flex flex-col min-h-screen'>
-      <Header />
-      <div className='grow container mx-auto my-4 px-4'>
-        {!session && (
+    <SessionLayout session={session}>
+      <div>
+        {session &&
+          session.token &&
+          session.token.accessTokenExpires &&
+          new Date(session.token.accessTokenExpires).toString()}
+        {audioFeature && (
           <div>
-            <div>not signed in...</div>
-            <button
-              className='btn'
-              onClick={(e) => {
-                e.preventDefault();
-                signIn();
-              }}
-            >
-              sign in
-            </button>
-          </div>
-        )}
-        {session && (
-          <div>
-            <div>signed in as {session.user?.name}</div>
-            <button
-              className='btn'
-              onClick={(e) => {
-                e.preventDefault();
-                signOut();
-              }}
-            >
-              sign out
-            </button>
-            {/* <div className=' whitespace-pre-wrap'>
-              {audioFeature && JSON.stringify(audioFeature, null, 2)}
-            </div> */}
-            <div>
-              {session &&
-                session.token &&
-                session.token.accessTokenExpires &&
-                new Date(session.token.accessTokenExpires).toString()}
-              {audioFeature && (
-                <div>
-                  <FeatureRadar
-                    acousticness={audioFeature.acousticness}
-                    danceability={audioFeature.danceability}
-                    energy={audioFeature.energy}
-                    liveness={audioFeature.liveness}
-                    speechiness={audioFeature.speechiness}
-                    valence={audioFeature.valence}
-                  />
-                </div>
-              )}
-            </div>
+            <FeatureRadar
+              acousticness={audioFeature.acousticness}
+              danceability={audioFeature.danceability}
+              energy={audioFeature.energy}
+              liveness={audioFeature.liveness}
+              speechiness={audioFeature.speechiness}
+              valence={audioFeature.valence}
+            />
           </div>
         )}
       </div>
-      <Footer />
-    </div>
+    </SessionLayout>
   );
 };
 

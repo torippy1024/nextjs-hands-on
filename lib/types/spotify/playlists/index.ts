@@ -4,7 +4,7 @@ export default interface SpotifyPlaylistType {
   collaborative: boolean;
   description: string;
   external_urls: SpotifyPlaylistExternalUrlsType;
-  followers: SpotifyPlaylistFollowersType;
+  followers?: SpotifyPlaylistFollowersType;
   href: string;
   id: string;
   images: SpotifyPlaylistImageType[];
@@ -22,7 +22,7 @@ export interface SpotifyPlaylistExternalUrlsType {
 }
 
 export interface SpotifyPlaylistFollowersType {
-  href: string;
+  href: string | null;
   total: number;
 }
 
@@ -34,21 +34,21 @@ export interface SpotifyPlaylistImageType {
 
 export interface SpotifyPlaylistOwnerType {
   external_urls: SpotifyPlaylistExternalUrlsType;
-  followers: SpotifyPlaylistFollowersType;
+  followers?: SpotifyPlaylistFollowersType;
   href: string;
   id: string;
   type: string;
   uri: string;
-  display_name: string;
+  display_name?: string;
 }
 
 export interface SpotifyPlaylistTracksType {
   href: string;
   items: SpotifyPlaylistItemType[];
   limit: number;
-  next: string;
+  next: string | null;
   offset: number;
-  previous: string;
+  previous: string | null;
   total: number;
 }
 

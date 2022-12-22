@@ -41,7 +41,7 @@ export interface SpotifyMePlaylistsOwnerType {
   id: string;
   type: string;
   uri: string;
-  display_name: string;
+  display_name?: string;
 }
 
 export interface SpotifyMePlaylistsTracksType {

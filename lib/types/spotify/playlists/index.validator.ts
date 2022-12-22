@@ -33,7 +33,7 @@ export const SpotifyPlaylistTypeSchema = {
       defaultProperties: [],
       properties: {
         href: {
-          type: 'string',
+          type: ['null', 'string'],
         },
         total: {
           type: 'number',
@@ -108,15 +108,7 @@ export const SpotifyPlaylistTypeSchema = {
           type: 'string',
         },
       },
-      required: [
-        'display_name',
-        'external_urls',
-        'followers',
-        'href',
-        'id',
-        'type',
-        'uri',
-      ],
+      required: ['external_urls', 'href', 'id', 'type', 'uri'],
       type: 'object',
     },
     SpotifyPlaylistTracksType: {
@@ -135,13 +127,13 @@ export const SpotifyPlaylistTypeSchema = {
           type: 'number',
         },
         next: {
-          type: 'string',
+          type: ['null', 'string'],
         },
         offset: {
           type: 'number',
         },
         previous: {
-          type: 'string',
+          type: ['null', 'string'],
         },
         total: {
           type: 'number',
@@ -242,7 +234,6 @@ export const SpotifyPlaylistTypeSchema = {
         },
       },
       required: [
-        'album_group',
         'album_type',
         'artists',
         'available_markets',
@@ -253,7 +244,6 @@ export const SpotifyPlaylistTypeSchema = {
         'name',
         'release_date',
         'release_date_precision',
-        'restrictions',
         'total_tracks',
         'type',
         'uri',
@@ -300,18 +290,7 @@ export const SpotifyPlaylistTypeSchema = {
           type: 'string',
         },
       },
-      required: [
-        'external_urls',
-        'followers',
-        'genres',
-        'href',
-        'id',
-        'images',
-        'name',
-        'popularity',
-        'type',
-        'uri',
-      ],
+      required: ['external_urls', 'href', 'id', 'name', 'type', 'uri'],
       type: 'object',
     },
     SpotifyTrackExternalIDSType: {
@@ -327,7 +306,7 @@ export const SpotifyPlaylistTypeSchema = {
           type: 'string',
         },
       },
-      required: ['ean', 'isrc', 'upc'],
+      required: ['isrc'],
       type: 'object',
     },
     SpotifyTrackExternalUrlsType: {
@@ -458,11 +437,9 @@ export const SpotifyPlaylistTypeSchema = {
         'href',
         'id',
         'is_local',
-        'is_playable',
         'name',
         'popularity',
         'preview_url',
-        'restrictions',
         'track_number',
         'type',
         'uri',
@@ -521,7 +498,6 @@ export const SpotifyPlaylistTypeSchema = {
     'collaborative',
     'description',
     'external_urls',
-    'followers',
     'href',
     'id',
     'images',

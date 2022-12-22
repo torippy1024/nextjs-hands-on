@@ -133,7 +133,7 @@ export const SpotifyMePlaylistsTypeSchema = {
           type: 'string',
         },
       },
-      required: ['display_name', 'external_urls', 'href', 'id', 'type', 'uri'],
+      required: ['external_urls', 'href', 'id', 'type', 'uri'],
       type: 'object',
     },
     SpotifyMePlaylistsTracksType: {

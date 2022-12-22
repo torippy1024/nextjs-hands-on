@@ -9,8 +9,8 @@ export default interface SpotifyTrackType {
   external_urls: SpotifyTrackExternalUrlsType;
   href: string;
   id: string;
-  is_playable: boolean;
-  restrictions: SpotifyTrackRestrictionsType;
+  is_playable?: boolean;
+  restrictions?: SpotifyTrackRestrictionsType;
   name: string;
   popularity: number;
   preview_url: string;
@@ -31,10 +31,10 @@ export interface SpotifyTrackAlbumType {
   name: string;
   release_date: string;
   release_date_precision: string;
-  restrictions: SpotifyTrackRestrictionsType;
+  restrictions?: SpotifyTrackRestrictionsType;
   type: string;
   uri: string;
-  album_group: string;
+  album_group?: string;
   artists: SpotifyTrackAlbumArtistType[];
 }
 
@@ -63,13 +63,13 @@ export interface SpotifyTrackRestrictionsType {
 
 export interface SpotifyTrackArtistType {
   external_urls: SpotifyTrackExternalUrlsType;
-  followers: SpotifyTrackFollowersType;
-  genres: string[];
+  followers?: SpotifyTrackFollowersType;
+  genres?: string[];
   href: string;
   id: string;
-  images: SpotifyTrackImageType[];
+  images?: SpotifyTrackImageType[];
   name: string;
-  popularity: number;
+  popularity?: number;
   type: string;
   uri: string;
 }
@@ -81,6 +81,6 @@ export interface SpotifyTrackFollowersType {
 
 export interface SpotifyTrackExternalIDSType {
   isrc: string;
-  ean: string;
-  upc: string;
+  ean?: string;
+  upc?: string;
 }

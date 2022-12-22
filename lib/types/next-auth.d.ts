@@ -23,6 +23,7 @@ declare module 'next-auth/jwt' {
     sub: string;
     accessToken: string | undefined;
     refreshToken: string | undefined;
+    accessTokenExpires: number | undefined;
     iat: number;
     exp: string;
     jit: string;

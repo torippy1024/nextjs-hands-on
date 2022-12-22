@@ -6,9 +6,9 @@ import Header from '../../lib/components/Header';
 import {SpotifyPlaylistType} from '../../lib/types/spotify/playlists';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {SpotifyAudioFeaturesType} from '../../lib/types/spotify/audio-features';
 import FeatureRadar from '../../lib/components/FeatureRadar';
 import IdsFeatureRadar from '../../lib/components/FeatureRadar/IdsFeatureRadar';
+import SpotifyAudioFeaturesType from '../../lib/types/spotify/audio-features/ids';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();

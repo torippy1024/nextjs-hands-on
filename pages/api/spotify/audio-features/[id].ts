@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import axios from 'axios';
-import {SpotifyAudioFeatureType} from '../../../../lib/types/spotify/audio-features';
+import SpotifyAudioFeatureType from '../../../../lib/types/spotify/audio-features';
 
 const getAudioFeature = async (accessToken: string, id: string) => {
   const playlistsResponse = await axios.get<SpotifyAudioFeatureType>(

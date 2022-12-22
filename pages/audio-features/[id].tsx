@@ -3,12 +3,10 @@ import {signIn, signOut, useSession} from 'next-auth/react';
 import {useEffect, useState} from 'react';
 import Footer from '../../lib/components/Footer';
 import Header from '../../lib/components/Header';
-import SpotifyEmbedded from '../../lib/components/SpotifyEmbedded';
-import {SpotifyPlaylistType} from '../../lib/types/spotify/playlists';
-import Link from 'next/link';
-import {SpotifyAudioFeatureType} from '../../lib/types/spotify/audio-features';
 import {useRouter} from 'next/router';
 import FeatureRadar from '../../lib/components/FeatureRadar';
+import SpotifyAudioFeatureType from '../../lib/types/spotify/audio-features';
+import validate from '../../lib/types/spotify/audio-features/index.validator';
 
 const Home: NextPage = () => {
   const {data: session, status} = useSession();
@@ -27,12 +25,9 @@ const Home: NextPage = () => {
       fetch(`${baseUrl}?${query}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data?.error) {
-            console.log(data.error);
-          } else {
-            setAudioFeature(data);
-          }
-        });
+          setAudioFeature(validate(data));
+        })
+        .catch((e) => console.error(e));
     }
   }, [session, id]);
 
@@ -70,6 +65,10 @@ const Home: NextPage = () => {
               {audioFeature && JSON.stringify(audioFeature, null, 2)}
             </div> */}
             <div>
+              {session &&
+                session.token &&
+                session.token.accessTokenExpires &&
+                new Date(session.token.accessTokenExpires).toString()}
               {audioFeature && (
                 <div>
                   <FeatureRadar

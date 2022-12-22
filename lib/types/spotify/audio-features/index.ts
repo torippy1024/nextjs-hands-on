@@ -1,4 +1,4 @@
-export interface SpotifyAudioFeatureType {
+export default interface SpotifyAudioFeatureType {
   acousticness: number;
   analysis_url: string;
   danceability: number;
@@ -17,8 +17,4 @@ export interface SpotifyAudioFeatureType {
   type: string;
   uri: string;
   valence: number;
-}
-
-export interface SpotifyAudioFeaturesType {
-  audio_features: SpotifyAudioFeatureType[];
 }

@@ -116,7 +116,9 @@ export type ValidateFunction<T> = ((data: unknown) => data is T) &
 export const isSpotifyAudioFeaturesType = ajv.compile(
   SpotifyAudioFeaturesTypeSchema,
 ) as ValidateFunction<SpotifyAudioFeaturesType>;
-export default function validate(value: unknown): SpotifyAudioFeaturesType {
+export default function validateSpotifyAudioFeatures(
+  value: unknown,
+): SpotifyAudioFeaturesType {
   if (isSpotifyAudioFeaturesType(value)) {
     return value;
   } else {

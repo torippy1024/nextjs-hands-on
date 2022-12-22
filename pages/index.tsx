@@ -3,13 +3,14 @@ import Footer from '../lib/components/Footer';
 import Header from '../lib/components/Header';
 import {signIn, signOut, useSession} from 'next-auth/react';
 import {useEffect, useState} from 'react';
-import {SpotifyMePlaylistsItemType} from '../lib/types/spotify/me/playlists';
 import Link from 'next/link';
+import validateSpotifyMePlaylists from '../lib/types/spotify/me/playlists/index.validator';
+import SpotifyMePlaylistsType from '../lib/types/spotify/me/playlists';
 
 const Home: NextPage = () => {
   const {data: session, status} = useSession();
 
-  const [playlists, setPlaylists] = useState<SpotifyMePlaylistsItemType[]>([]);
+  const [playlists, setPlaylists] = useState<SpotifyMePlaylistsType>();
 
   useEffect(() => {
     if (session) {
@@ -23,12 +24,9 @@ const Home: NextPage = () => {
       fetch(`${baseUrl}?${query}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data?.error) {
-            console.log(data.error);
-          } else {
-            setPlaylists(data);
-          }
-        });
+          setPlaylists(validateSpotifyMePlaylists(data));
+        })
+        .catch((e) => console.error(e));
     }
   }, [session]);
 
@@ -64,14 +62,15 @@ const Home: NextPage = () => {
               sign out
             </button>
             <div>
-              {playlists.map((playlist, index) => (
-                <div key={index}>
-                  <Link href={`/playlists/${playlist.id}`}>
-                    {playlist.name} | {playlist.id}
-                  </Link>
-                  {/* <img src={playlist.imageUrl} /> */}
-                </div>
-              ))}
+              {playlists &&
+                playlists.items.map((playlist, index) => (
+                  <div key={index}>
+                    <Link href={`/playlists/${playlist.id}`}>
+                      {playlist.name} | {playlist.id}
+                    </Link>
+                    {/* <img src={playlist.imageUrl} /> */}
+                  </div>
+                ))}
             </div>
           </div>
         )}

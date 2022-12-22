@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import axios from 'axios';
-import {SpotifyPlaylistType} from '../../../../lib/types/spotify/playlists';
+import SpotifyPlaylistType from '../../../../lib/types/spotify/playlists';
 
 const getPlaylists = async (accessToken: string, id: string) => {
   const playlistsResponse = await axios.get<SpotifyPlaylistType>(

@@ -3,12 +3,12 @@ import {signIn, signOut, useSession} from 'next-auth/react';
 import {useEffect, useState} from 'react';
 import Footer from '../../lib/components/Footer';
 import Header from '../../lib/components/Header';
-import {SpotifyPlaylistType} from '../../lib/types/spotify/playlists';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import FeatureRadar from '../../lib/components/FeatureRadar';
 import IdsFeatureRadar from '../../lib/components/FeatureRadar/IdsFeatureRadar';
 import SpotifyAudioFeaturesType from '../../lib/types/spotify/audio-features/ids';
+import SpotifyPlaylistType from '../../lib/types/spotify/playlists';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();

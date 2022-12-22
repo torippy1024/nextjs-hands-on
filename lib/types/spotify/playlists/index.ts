@@ -1,6 +1,6 @@
-import {SpotifyTrackType} from '../tracks';
+import SpotifyTrackType from '../tracks';
 
-export interface SpotifyPlaylistType {
+export default interface SpotifyPlaylistType {
   collaborative: boolean;
   description: string;
   external_urls: SpotifyPlaylistExternalUrlsType;

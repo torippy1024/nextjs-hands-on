@@ -1,17 +1,17 @@
-export interface SpotifyMePlaylistsType {
+export default interface SpotifyMePlaylistsType {
   items: SpotifyMePlaylistsItemType[];
   href: string;
   limit: number;
-  next: string;
+  next: string | null;
   offset: number;
-  previous: string;
+  previous: string | null;
   total: number;
 }
 
 export interface SpotifyMePlaylistsItemType {
   collaborative: boolean;
   description: string;
-  externalUrls: SpotifyMePlaylistsExternalUrlsType;
+  external_urls: SpotifyMePlaylistsExternalUrlsType;
   href: string;
   id: string;
   images: SpotifyMePlaylistsImageType[];
@@ -30,13 +30,13 @@ export interface SpotifyMePlaylistsExternalUrlsType {
 
 export interface SpotifyMePlaylistsImageType {
   url: string;
-  height: number;
-  width: number;
+  height: number | null;
+  width: number | null;
 }
 
 export interface SpotifyMePlaylistsOwnerType {
-  externalUrls: SpotifyMePlaylistsExternalUrlsType;
-  followers: SpotifyMePlaylistsTracksType;
+  external_urls: SpotifyMePlaylistsExternalUrlsType;
+  followers?: SpotifyMePlaylistsTracksType;
   href: string;
   id: string;
   type: string;

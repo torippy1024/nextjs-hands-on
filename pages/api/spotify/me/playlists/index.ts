@@ -1,7 +1,7 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import axios from 'axios';
 import {isNumber} from '../../../../../lib/utils';
-import {SpotifyMePlaylistsType} from '../../../../../lib/types/spotify/me/playlists';
+import SpotifyMePlaylistsType from '../../../../../lib/types/spotify/me/playlists';
 
 const getPlaylists = async (
   accessToken: string,
@@ -18,7 +18,7 @@ const getPlaylists = async (
     },
   );
 
-  return playlistsResponse.data.items;
+  return playlistsResponse.data;
 };
 
 export default async function playlists(

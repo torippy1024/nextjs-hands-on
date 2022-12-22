@@ -1,4 +1,4 @@
-export interface SpotifyTrackType {
+export default interface SpotifyTrackType {
   album: SpotifyTrackAlbumType;
   artists: SpotifyTrackArtistType[];
   available_markets: string[];

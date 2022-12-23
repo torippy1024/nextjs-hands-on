@@ -1,16 +1,16 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import {fetchSpotifyApi} from '../../../../lib/utils';
-import validateSpotifyPlaylist from '../../../../lib/types/spotify/playlists/index.validator';
+import validateSpotifyTrack from '../../../../lib/types/spotify/tracks/index.validator';
 
-const getPlaylist = async (accessToken: string, id: string) => {
-  const baseUrl = `https://api.spotify.com/v1/playlists/${id}`;
+const getTrack = async (accessToken: string, id: string) => {
+  const baseUrl = `https://api.spotify.com/v1/tracks/${id}`;
   const params = {};
 
   return await fetchSpotifyApi({
     baseUrl,
     params,
     accessToken,
-    validate: validateSpotifyPlaylist,
+    validate: validateSpotifyTrack,
   });
 };
 
@@ -30,7 +30,7 @@ export default async function playlists(
       });
     }
 
-    const response = await getPlaylist(accessToken, id);
+    const response = await getTrack(accessToken, id);
 
     return res.status(200).json(response);
   }

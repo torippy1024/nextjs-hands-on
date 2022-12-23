@@ -7,7 +7,7 @@ import IdsFeatureRadar from '../../lib/components/FeatureRadar/IdsFeatureRadar';
 import SpotifyPlaylistType from '../../lib/types/spotify/playlists';
 import SessionLayout from '../../lib/components/Layout/SessionLayout';
 import validateSpotifyPlaylist from '../../lib/types/spotify/playlists/index.validator';
-import {fetchAndSetState} from '../../lib/utils/fetch/fetchAndSetState';
+import fetchAndSetState from '../../lib/utils/fetch/fetchAndSetState';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();

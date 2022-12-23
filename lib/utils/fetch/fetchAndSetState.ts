@@ -9,7 +9,7 @@ export type FetchAndSetStateType<T> = {
   validate: (value: unknown) => T;
 };
 
-export const fetchAndSetState = <T>({
+const fetchAndSetState = <T>({
   baseUrl,
   params,
   setState,
@@ -25,3 +25,5 @@ export const fetchAndSetState = <T>({
     })
     .catch((e) => console.error(e));
 };
+
+export default fetchAndSetState;

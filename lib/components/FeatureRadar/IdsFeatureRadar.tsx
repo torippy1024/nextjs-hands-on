@@ -2,7 +2,7 @@ import FeatureRadar from '.';
 import {useState, useEffect} from 'react';
 import SpotifyAudioFeaturesType from '../../types/spotify/audio-features/ids';
 import validateSpotifyAudioFeatures from '../../types/spotify/audio-features/ids.validator';
-import {fetchAndSetState} from '../../utils/fetch/fetchAndSetState';
+import fetchAndSetState from '../../utils/fetch/fetchAndSetState';
 
 type FeatureRadarType = {
   ids: string[];

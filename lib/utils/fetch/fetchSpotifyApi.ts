@@ -7,7 +7,7 @@ export type FetchSpotifyApiType<T> = {
   validate: (value: unknown) => T;
 };
 
-export const fetchSpotifyApi = async <T>({
+const fetchSpotifyApi = async <T>({
   baseUrl,
   params,
   accessToken,
@@ -25,3 +25,5 @@ export const fetchSpotifyApi = async <T>({
     .then((data) => validate(data))
     .catch((e) => console.error(e));
 };
+
+export default fetchSpotifyApi;

@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import validateSpotifyTrack from '../../../../lib/types/spotify/tracks/index.validator';
-import {fetchSpotifyApi} from '../../../../lib/utils/fetch/fetchSpotifyApi';
+import fetchSpotifyApi from '../../../../lib/utils/fetch/fetchSpotifyApi';
 
 const getTrack = async (accessToken: string, id: string) => {
   const baseUrl = `https://api.spotify.com/v1/tracks/${id}`;

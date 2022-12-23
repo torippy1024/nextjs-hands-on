@@ -8,7 +8,7 @@ import SessionLayout from '../../lib/components/Layout/SessionLayout';
 import validateSpotifyAudioFeature from '../../lib/types/spotify/audio-features/index.validator';
 import SpotifyTrackType from '../../lib/types/spotify/tracks';
 import validateSpotifyTrack from '../../lib/types/spotify/tracks/index.validator';
-import {fetchAndSetState} from '../../lib/utils/fetch/fetchAndSetState';
+import fetchAndSetState from '../../lib/utils/fetch/fetchAndSetState';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();

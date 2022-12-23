@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {fetchSpotifyApi} from '../../../../lib/utils';
 import validateSpotifyPlaylist from '../../../../lib/types/spotify/playlists/index.validator';
+import {fetchSpotifyApi} from '../../../../lib/utils/fetch/fetchSpotifyApi';
 
 const getPlaylist = async (accessToken: string, id: string) => {
   const baseUrl = `https://api.spotify.com/v1/playlists/${id}`;

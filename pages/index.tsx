@@ -5,7 +5,7 @@ import Link from 'next/link';
 import validateSpotifyMePlaylists from '../lib/types/spotify/me/playlists/index.validator';
 import SpotifyMePlaylistsType from '../lib/types/spotify/me/playlists';
 import SessionLayout from '../lib/components/Layout/SessionLayout';
-import {fetchAndSetState} from '../lib/utils';
+import {fetchAndSetState} from '../lib/utils/fetch/fetchAndSetState';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();

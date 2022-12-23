@@ -1,6 +1,7 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {fetchSpotifyApi, isNumber} from '../../../../../lib/utils';
 import validateSpotifyMePlaylists from '../../../../../lib/types/spotify/me/playlists/index.validator';
+import {isNumber} from '../../../../../lib/utils';
+import {fetchSpotifyApi} from '../../../../../lib/utils/fetch/fetchSpotifyApi';
 
 const getPlaylists = async (
   accessToken: string,

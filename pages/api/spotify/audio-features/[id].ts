@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {fetchSpotifyApi} from '../../../../lib/utils';
 import validateSpotifyAudioFeature from '../../../../lib/types/spotify/audio-features/index.validator';
+import {fetchSpotifyApi} from '../../../../lib/utils/fetch/fetchSpotifyApi';
 
 const getAudioFeature = async (accessToken: string, id: string) => {
   const baseUrl = `https://api.spotify.com/v1/audio-features/${id}`;

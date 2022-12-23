@@ -6,9 +6,9 @@ import FeatureRadar from '../../lib/components/FeatureRadar';
 import SpotifyAudioFeatureType from '../../lib/types/spotify/audio-features';
 import SessionLayout from '../../lib/components/Layout/SessionLayout';
 import validateSpotifyAudioFeature from '../../lib/types/spotify/audio-features/index.validator';
-import {fetchAndSetState} from '../../lib/utils';
 import SpotifyTrackType from '../../lib/types/spotify/tracks';
 import validateSpotifyTrack from '../../lib/types/spotify/tracks/index.validator';
+import {fetchAndSetState} from '../../lib/utils/fetch/fetchAndSetState';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();

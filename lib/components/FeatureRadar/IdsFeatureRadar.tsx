@@ -1,7 +1,8 @@
 import FeatureRadar from '.';
 import {useState, useEffect} from 'react';
 import SpotifyAudioFeaturesType from '../../types/spotify/audio-features/ids';
-import validate from '../../types/spotify/audio-features/ids.validator';
+import {fetchAndSetState} from '../../utils';
+import validateSpotifyAudioFeatures from '../../types/spotify/audio-features/ids.validator';
 
 type FeatureRadarType = {
   ids: string[];
@@ -13,18 +14,18 @@ const IdsFeatureRadar = ({ids, accessToken}: FeatureRadarType) => {
 
   useEffect(() => {
     if (ids.length && accessToken) {
-      const featuresUrl = `/api/spotify/audio-features`;
-      const featuresParams = {
+      const baseUrl = `/api/spotify/audio-features`;
+      const params = {
         accessToken: accessToken,
         ids: ids.join(','),
       };
-      const featuresQuery = new URLSearchParams(featuresParams);
-      fetch(`${featuresUrl}?${featuresQuery}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setFeatures(validate(data));
-        })
-        .catch((e) => console.error(e));
+
+      fetchAndSetState({
+        baseUrl,
+        params,
+        setState: setFeatures,
+        validate: validateSpotifyAudioFeatures,
+      });
     }
   }, [ids, accessToken]);
   return (

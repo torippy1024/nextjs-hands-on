@@ -4,22 +4,17 @@ import {useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import IdsFeatureRadar from '../../lib/components/FeatureRadar/IdsFeatureRadar';
-import SpotifyAudioFeaturesType from '../../lib/types/spotify/audio-features/ids';
 import SpotifyPlaylistType from '../../lib/types/spotify/playlists';
 import SessionLayout from '../../lib/components/Layout/SessionLayout';
 import validateSpotifyPlaylist from '../../lib/types/spotify/playlists/index.validator';
+import {fetchAndSetState} from '../../lib/utils';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();
 
   const [playlist, setPlaylist] = useState<SpotifyPlaylistType>();
-  const [trackIds, setTrackIds] = useState<string[]>([]);
   const router = useRouter();
   const {id} = router.query;
-
-  const getTrackIdsFromPlaylist = (playlist: SpotifyPlaylistType) => {
-    return playlist.tracks.items.map((item) => item.track.id);
-  };
 
   useEffect(() => {
     if (session) {
@@ -27,16 +22,13 @@ const Home: NextPage = () => {
       const params = {
         accessToken: session.token.accessToken as string,
       };
-      const query = new URLSearchParams(params);
-      fetch(`${baseUrl}?${query}`)
-        .then((res) => res.json())
-        .then((data) => {
-          const playlist = validateSpotifyPlaylist(data);
-          const trackIds = getTrackIdsFromPlaylist(playlist);
-          setPlaylist(playlist);
-          setTrackIds(trackIds);
-        })
-        .catch((e) => console.error(e));
+
+      fetchAndSetState({
+        baseUrl,
+        params,
+        setState: setPlaylist,
+        validate: validateSpotifyPlaylist,
+      });
     }
   }, [session, id]);
 
@@ -46,10 +38,10 @@ const Home: NextPage = () => {
         {playlist?.name}
       </div>
       <div>
-        {trackIds && session && (
+        {playlist && session && (
           <div>
             <IdsFeatureRadar
-              ids={trackIds}
+              ids={playlist.tracks.items.map((item) => item.track.id)}
               accessToken={session.token.accessToken as string}
             />
           </div>

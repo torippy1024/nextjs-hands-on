@@ -5,6 +5,7 @@ import Link from 'next/link';
 import validateSpotifyMePlaylists from '../lib/types/spotify/me/playlists/index.validator';
 import SpotifyMePlaylistsType from '../lib/types/spotify/me/playlists';
 import SessionLayout from '../lib/components/Layout/SessionLayout';
+import {fetchAndSetState} from '../lib/utils';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();
@@ -19,13 +20,13 @@ const Home: NextPage = () => {
         page: '0',
         limit: '30',
       };
-      const query = new URLSearchParams(params);
-      fetch(`${baseUrl}?${query}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setPlaylists(validateSpotifyMePlaylists(data));
-        })
-        .catch((e) => console.error(e));
+
+      fetchAndSetState({
+        baseUrl,
+        params,
+        setState: setPlaylists,
+        validate: validateSpotifyMePlaylists,
+      });
     }
   }, [session]);
 

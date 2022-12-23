@@ -17,20 +17,6 @@ const Header = () => {
       <li>
         <a>hoge2</a>
       </li>
-      <li tabIndex={0}>
-        <a>
-          Parent
-          <AiOutlineDown />
-        </a>
-        <ul className='p-2 bg-base-200'>
-          <li>
-            <a>Submenu 1</a>
-          </li>
-          <li>
-            <a>Submenu 2</a>
-          </li>
-        </ul>
-      </li>
     </ul>
   );
 

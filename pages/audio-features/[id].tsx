@@ -6,6 +6,7 @@ import FeatureRadar from '../../lib/components/FeatureRadar';
 import SpotifyAudioFeatureType from '../../lib/types/spotify/audio-features';
 import SessionLayout from '../../lib/components/Layout/SessionLayout';
 import validateSpotifyAudioFeature from '../../lib/types/spotify/audio-features/index.validator';
+import {fetchAndSetState} from '../../lib/utils';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();
@@ -15,20 +16,17 @@ const Home: NextPage = () => {
   const {id} = router.query;
 
   useEffect(() => {
-    if (session) {
+    if (session && id) {
       const baseUrl = `/api/spotify/audio-features/${id}`;
       const params = {
         accessToken: session.token.accessToken as string,
       };
-      const query = new URLSearchParams(params);
-      fetch(`${baseUrl}?${query}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data) {
-            setAudioFeature(validateSpotifyAudioFeature(data));
-          }
-        })
-        .catch((e) => console.error(e));
+      fetchAndSetState({
+        baseUrl,
+        params,
+        setState: setAudioFeature,
+        validate: validateSpotifyAudioFeature,
+      });
     }
   }, [session, id]);
 

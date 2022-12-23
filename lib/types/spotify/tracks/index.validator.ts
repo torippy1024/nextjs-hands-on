@@ -84,10 +84,10 @@ export const SpotifyTrackTypeSchema = {
           type: 'string',
         },
         release_date: {
-          type: 'string',
+          type: ['null', 'string'],
         },
         release_date_precision: {
-          type: 'string',
+          type: ['null', 'string'],
         },
         restrictions: {
           $ref: '#/definitions/SpotifyTrackRestrictionsType',
@@ -175,7 +175,6 @@ export const SpotifyTrackTypeSchema = {
           type: 'string',
         },
       },
-      required: ['isrc'],
       type: 'object',
     },
     SpotifyTrackExternalUrlsType: {
@@ -278,7 +277,7 @@ export const SpotifyTrackTypeSchema = {
       type: 'number',
     },
     preview_url: {
-      type: 'string',
+      type: ['null', 'string'],
     },
     restrictions: {
       $ref: '#/definitions/SpotifyTrackRestrictionsType',

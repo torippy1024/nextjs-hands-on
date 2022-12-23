@@ -1,16 +1,14 @@
 import type {NextPage} from 'next';
-import {signIn, signOut, useSession} from 'next-auth/react';
+import {useSession} from 'next-auth/react';
 import {useEffect, useState} from 'react';
-import Footer from '../../lib/components/Footer';
-import Header from '../../lib/components/Header';
 import {useRouter} from 'next/router';
 import FeatureRadar from '../../lib/components/FeatureRadar';
 import SpotifyAudioFeatureType from '../../lib/types/spotify/audio-features';
-import validate from '../../lib/types/spotify/audio-features/index.validator';
 import SessionLayout from '../../lib/components/Layout/SessionLayout';
+import validateSpotifyAudioFeature from '../../lib/types/spotify/audio-features/index.validator';
 
 const Home: NextPage = () => {
-  const {data: session, status} = useSession();
+  const {data: session} = useSession();
 
   const [audioFeature, setAudioFeature] = useState<SpotifyAudioFeatureType>();
   const router = useRouter();
@@ -26,7 +24,9 @@ const Home: NextPage = () => {
       fetch(`${baseUrl}?${query}`)
         .then((res) => res.json())
         .then((data) => {
-          setAudioFeature(validate(data));
+          if (data) {
+            setAudioFeature(validateSpotifyAudioFeature(data));
+          }
         })
         .catch((e) => console.error(e));
     }
@@ -35,10 +35,6 @@ const Home: NextPage = () => {
   return (
     <SessionLayout session={session}>
       <div>
-        {session &&
-          session.token &&
-          session.token.accessTokenExpires &&
-          new Date(session.token.accessTokenExpires).toString()}
         {audioFeature && (
           <div>
             <FeatureRadar
@@ -51,6 +47,7 @@ const Home: NextPage = () => {
             />
           </div>
         )}
+        {!audioFeature && <div>Not Found</div>}
       </div>
     </SessionLayout>
   );

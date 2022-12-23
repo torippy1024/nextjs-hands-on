@@ -31,15 +31,16 @@ const Home: NextPage = () => {
 
   return (
     <SessionLayout session={session}>
-      <div>
+      <div className='my-4'>
         {playlists &&
           playlists.items.map((playlist, index) => (
-            <div key={index}>
-              <Link href={`/playlists/${playlist.id}`}>
-                {playlist.name} | {playlist.id}
-              </Link>
+            <Link href={`/playlists/${playlist.id}`} key={index}>
+              <div className='flex justify-between border rounded p-2 bg-orange-50'>
+                <div className='font-bold text-lg'>{playlist.name}</div>
+                <div>{playlist.tracks.total} 曲</div>
+              </div>
               {/* <img src={playlist.imageUrl} /> */}
-            </div>
+            </Link>
           ))}
       </div>
     </SessionLayout>

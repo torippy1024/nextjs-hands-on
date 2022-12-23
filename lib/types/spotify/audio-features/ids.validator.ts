@@ -103,7 +103,14 @@ export const SpotifyAudioFeaturesTypeSchema = {
   properties: {
     audio_features: {
       items: {
-        $ref: '#/definitions/default',
+        anyOf: [
+          {
+            $ref: '#/definitions/default',
+          },
+          {
+            type: 'null',
+          },
+        ],
       },
       type: 'array',
     },

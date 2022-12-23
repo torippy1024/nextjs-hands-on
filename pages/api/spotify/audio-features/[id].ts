@@ -3,17 +3,23 @@ import axios from 'axios';
 import SpotifyAudioFeatureType from '../../../../lib/types/spotify/audio-features';
 
 const getAudioFeature = async (accessToken: string, id: string) => {
-  const playlistsResponse = await axios.get<SpotifyAudioFeatureType>(
-    `https://api.spotify.com/v1/audio-features/${id}`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
+  const playlistsResponse = await axios
+    .get<SpotifyAudioFeatureType>(
+      `https://api.spotify.com/v1/audio-features/${id}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
-    },
-  );
+    )
+    .then((res) => res.data)
+    .catch((e) => {
+      console.log(e);
+      return null;
+    });
 
-  return playlistsResponse.data;
+  return playlistsResponse;
 };
 
 export default async function playlists(

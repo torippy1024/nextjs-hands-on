@@ -13,7 +13,7 @@ export default interface SpotifyTrackType {
   restrictions?: SpotifyTrackRestrictionsType;
   name: string;
   popularity: number;
-  preview_url: string;
+  preview_url: string | null;
   track_number: number;
   type: string;
   uri: string;
@@ -29,8 +29,8 @@ export interface SpotifyTrackAlbumType {
   id: string;
   images: SpotifyTrackImageType[];
   name: string;
-  release_date: string;
-  release_date_precision: string;
+  release_date: string | null;
+  release_date_precision: string | null;
   restrictions?: SpotifyTrackRestrictionsType;
   type: string;
   uri: string;
@@ -80,7 +80,7 @@ export interface SpotifyTrackFollowersType {
 }
 
 export interface SpotifyTrackExternalIDSType {
-  isrc: string;
+  isrc?: string;
   ean?: string;
   upc?: string;
 }

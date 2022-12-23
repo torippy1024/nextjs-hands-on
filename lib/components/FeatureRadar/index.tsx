@@ -8,7 +8,6 @@ import {
   Legend,
 } from 'chart.js';
 import {Radar} from 'react-chartjs-2';
-import {SpotifyAudioFeatureType} from '../../types/spotify/audio-features';
 
 ChartJS.register(
   RadialLinearScale,

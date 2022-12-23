@@ -42,6 +42,9 @@ const Home: NextPage = () => {
 
   return (
     <SessionLayout session={session}>
+      <div className='font-bold text-3xl mt-4 mb-2 text-center'>
+        {playlist?.name}
+      </div>
       <div>
         {trackIds && session && (
           <div>
@@ -53,11 +56,16 @@ const Home: NextPage = () => {
         )}
         {playlist &&
           playlist.tracks.items.map((item, index) => (
-            <div key={index}>
-              <Link href={`/audio-features/${item.track.id}`}>
-                {item.track.name}
-              </Link>
-            </div>
+            <Link href={`/audio-features/${item.track.id}`} key={index}>
+              <div className='flex justify-between border rounded p-2 bg-cyan-50'>
+                <div className='font-bold text-lg'>
+                  {index + 1}: {item.track.name}
+                </div>
+                <div>
+                  {item.track.artists.length && item.track.artists[0].name}
+                </div>
+              </div>
+            </Link>
           ))}
       </div>
     </SessionLayout>

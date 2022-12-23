@@ -46,13 +46,13 @@ export const SpotifyPlaylistTypeSchema = {
       defaultProperties: [],
       properties: {
         height: {
-          type: 'number',
+          type: ['null', 'number'],
         },
         url: {
           type: 'string',
         },
         width: {
-          type: 'number',
+          type: ['null', 'number'],
         },
       },
       required: ['height', 'url', 'width'],
@@ -215,10 +215,10 @@ export const SpotifyPlaylistTypeSchema = {
           type: 'string',
         },
         release_date: {
-          type: 'string',
+          type: ['null', 'string'],
         },
         release_date_precision: {
-          type: 'string',
+          type: ['null', 'string'],
         },
         restrictions: {
           $ref: '#/definitions/SpotifyTrackRestrictionsType',
@@ -306,7 +306,6 @@ export const SpotifyPlaylistTypeSchema = {
           type: 'string',
         },
       },
-      required: ['isrc'],
       type: 'object',
     },
     SpotifyTrackExternalUrlsType: {
@@ -410,7 +409,7 @@ export const SpotifyPlaylistTypeSchema = {
           type: 'number',
         },
         preview_url: {
-          type: 'string',
+          type: ['null', 'string'],
         },
         restrictions: {
           $ref: '#/definitions/SpotifyTrackRestrictionsType',

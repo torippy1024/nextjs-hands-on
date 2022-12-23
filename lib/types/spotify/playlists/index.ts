@@ -28,8 +28,8 @@ export interface SpotifyPlaylistFollowersType {
 
 export interface SpotifyPlaylistImageType {
   url: string;
-  height: number;
-  width: number;
+  height: number | null;
+  width: number | null;
 }
 
 export interface SpotifyPlaylistOwnerType {

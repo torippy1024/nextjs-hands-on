@@ -29,43 +29,43 @@ const IdsFeatureRadar = ({ids, accessToken}: FeatureRadarType) => {
   }, [ids, accessToken]);
   return (
     <div>
-      {features && (
+      {features && features.audio_features.filter((i) => i).length && (
         <FeatureRadar
           acousticness={
             features.audio_features.reduce(
-              (sum, feature) => sum + feature.acousticness,
+              (sum, feature) => sum + (feature ? feature.acousticness : 0),
               0,
-            ) / features.audio_features.length
+            ) / features.audio_features.filter((i) => i).length
           }
           danceability={
             features.audio_features.reduce(
-              (sum, feature) => sum + feature.danceability,
+              (sum, feature) => sum + (feature ? feature.danceability : 0),
               0,
-            ) / features.audio_features.length
+            ) / features.audio_features.filter((i) => i).length
           }
           energy={
             features.audio_features.reduce(
-              (sum, feature) => sum + feature.energy,
+              (sum, feature) => sum + (feature ? feature.energy : 0),
               0,
-            ) / features.audio_features.length
+            ) / features.audio_features.filter((i) => i).length
           }
           liveness={
             features.audio_features.reduce(
-              (sum, feature) => sum + feature.liveness,
+              (sum, feature) => sum + (feature ? feature.liveness : 0),
               0,
-            ) / features.audio_features.length
+            ) / features.audio_features.filter((i) => i).length
           }
           speechiness={
             features.audio_features.reduce(
-              (sum, feature) => sum + feature.speechiness,
+              (sum, feature) => sum + (feature ? feature.speechiness : 0),
               0,
-            ) / features.audio_features.length
+            ) / features.audio_features.filter((i) => i).length
           }
           valence={
             features.audio_features.reduce(
-              (sum, feature) => sum + feature.acousticness,
+              (sum, feature) => sum + (feature ? feature.acousticness : 0),
               0,
-            ) / features.audio_features.length
+            ) / features.audio_features.filter((i) => i).length
           }
         />
       )}

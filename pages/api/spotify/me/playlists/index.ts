@@ -1,24 +1,24 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import axios from 'axios';
-import {isNumber} from '../../../../../lib/utils';
-import SpotifyMePlaylistsType from '../../../../../lib/types/spotify/me/playlists';
+import {fetchSpotifyApi, isNumber} from '../../../../../lib/utils';
+import validateSpotifyMePlaylists from '../../../../../lib/types/spotify/me/playlists/index.validator';
 
 const getPlaylists = async (
   accessToken: string,
-  offset: number,
-  limit: number,
+  offset: string,
+  limit: string,
 ) => {
-  const playlistsResponse = await axios.get<SpotifyMePlaylistsType>(
-    `https://api.spotify.com/v1/me/playlists?offset=${offset}&limit=${limit}`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    },
-  );
+  const baseUrl = 'https://api.spotify.com/v1/me/playlists';
+  const params = {
+    offset,
+    limit,
+  };
 
-  return playlistsResponse.data;
+  return await fetchSpotifyApi({
+    baseUrl,
+    params,
+    accessToken,
+    validate: validateSpotifyMePlaylists,
+  });
 };
 
 export default async function playlists(
@@ -44,8 +44,8 @@ export default async function playlists(
 
     const response = await getPlaylists(
       accessToken,
-      Number(offset),
-      Number(limit),
+      String(offset),
+      String(limit),
     );
 
     return res.status(200).json(response);

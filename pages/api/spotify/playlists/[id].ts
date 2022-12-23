@@ -1,19 +1,17 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import axios from 'axios';
-import SpotifyPlaylistType from '../../../../lib/types/spotify/playlists';
+import {fetchSpotifyApi} from '../../../../lib/utils';
+import validateSpotifyPlaylist from '../../../../lib/types/spotify/playlists/index.validator';
 
 const getPlaylists = async (accessToken: string, id: string) => {
-  const playlistsResponse = await axios.get<SpotifyPlaylistType>(
-    `https://api.spotify.com/v1/playlists/${id}`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    },
-  );
+  const baseUrl = `https://api.spotify.com/v1/playlists/${id}`;
+  const params = {};
 
-  return playlistsResponse.data;
+  return await fetchSpotifyApi({
+    baseUrl,
+    params,
+    accessToken,
+    validate: validateSpotifyPlaylist,
+  });
 };
 
 export default async function playlists(

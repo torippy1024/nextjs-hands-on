@@ -1,25 +1,17 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import axios from 'axios';
-import SpotifyAudioFeatureType from '../../../../lib/types/spotify/audio-features';
+import {fetchSpotifyApi} from '../../../../lib/utils';
+import validateSpotifyAudioFeature from '../../../../lib/types/spotify/audio-features/index.validator';
 
 const getAudioFeature = async (accessToken: string, id: string) => {
-  const playlistsResponse = await axios
-    .get<SpotifyAudioFeatureType>(
-      `https://api.spotify.com/v1/audio-features/${id}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-    )
-    .then((res) => res.data)
-    .catch((e) => {
-      console.log(e);
-      return null;
-    });
+  const baseUrl = `https://api.spotify.com/v1/audio-features/${id}`;
+  const params = {};
 
-  return playlistsResponse;
+  return await fetchSpotifyApi({
+    baseUrl,
+    params,
+    accessToken,
+    validate: validateSpotifyAudioFeature,
+  });
 };
 
 export default async function playlists(

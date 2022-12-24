@@ -1,48 +1,19 @@
 import type {NextPage} from 'next';
 import {useSession} from 'next-auth/react';
-import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import FeatureRadar from '../../lib/components/FeatureRadar';
-import SpotifyAudioFeatureType from '../../lib/types/spotify/audio-features';
 import SessionLayout from '../../lib/components/Layout/SessionLayout';
-import validateSpotifyAudioFeature from '../../lib/types/spotify/audio-features/index.validator';
-import SpotifyTrackType from '../../lib/types/spotify/tracks';
-import validateSpotifyTrack from '../../lib/types/spotify/tracks/index.validator';
-import fetchAndSetState from '../../lib/utils/fetch/fetchAndSetState';
+import useAudioFeature from '../../lib/hooks/useAudioFeature';
+import useTrack from '../../lib/hooks/useTrack';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();
 
-  const [audioFeature, setAudioFeature] = useState<SpotifyAudioFeatureType>();
-  const [track, setTrack] = useState<SpotifyTrackType>();
   const router = useRouter();
   const {id} = router.query;
 
-  useEffect(() => {
-    if (session && id) {
-      const featureBaseUrl = `/api/spotify/audio-features/${id}`;
-      const featureParams = {
-        accessToken: session.token.accessToken as string,
-      };
-      fetchAndSetState({
-        baseUrl: featureBaseUrl,
-        params: featureParams,
-        setState: setAudioFeature,
-        validate: validateSpotifyAudioFeature,
-      });
-
-      const trackBaseUrl = `/api/spotify/tracks/${id}`;
-      const trackParams = {
-        accessToken: session.token.accessToken as string,
-      };
-      fetchAndSetState({
-        baseUrl: trackBaseUrl,
-        params: trackParams,
-        setState: setTrack,
-        validate: validateSpotifyTrack,
-      });
-    }
-  }, [session, id]);
+  const {audioFeature} = useAudioFeature(id, session);
+  const {track} = useTrack(id, session);
 
   return (
     <SessionLayout session={session}>

@@ -1,34 +1,13 @@
 import type {NextPage} from 'next';
 import {useSession} from 'next-auth/react';
-import {useEffect, useState} from 'react';
 import Link from 'next/link';
-import validateSpotifyMePlaylists from '../lib/types/spotify/me/playlists/index.validator';
-import SpotifyMePlaylistsType from '../lib/types/spotify/me/playlists';
 import SessionLayout from '../lib/components/Layout/SessionLayout';
-import fetchAndSetState from '../lib/utils/fetch/fetchAndSetState';
+import useMePlaylists from '../lib/hooks/useMePlaylists';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();
 
-  const [playlists, setPlaylists] = useState<SpotifyMePlaylistsType>();
-
-  useEffect(() => {
-    if (session) {
-      const baseUrl = '/api/spotify/me/playlists';
-      const params = {
-        accessToken: session.token.accessToken as string,
-        page: '0',
-        limit: '30',
-      };
-
-      fetchAndSetState({
-        baseUrl,
-        params,
-        setState: setPlaylists,
-        validate: validateSpotifyMePlaylists,
-      });
-    }
-  }, [session]);
+  const {playlists} = useMePlaylists(session);
 
   return (
     <SessionLayout session={session}>

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import {AiOutlineDown, AiOutlineMenu} from 'react-icons/ai';
 
 type HeaderType = {
@@ -39,7 +40,9 @@ const Header = ({elements}: HeaderType) => {
           </ul>
         </div>
         <div className='flex-1'>
-          <a className='btn btn-ghost normal-case text-xl'>Next.js</a>
+          <Link href={'/'} className='btn btn-ghost normal-case text-xl'>
+            Spotify Analytics
+          </Link>
         </div>
         <div className='hidden md:block flex-none'>
           <ul className='menu menu-horizontal p-0'>

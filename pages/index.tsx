@@ -12,6 +12,9 @@ const Home: NextPage = () => {
   return (
     <SessionLayout session={session}>
       <div className='my-4'>
+        <div className='font-bold text-3xl mt-4 mb-2 underline decoration-orange-300'>
+          Your Playlists
+        </div>
         {playlists &&
           playlists.items.map((playlist, index) => (
             <Link href={`/playlists/${playlist.id}`} key={playlist.id}>

@@ -17,23 +17,26 @@ const Home: NextPage = () => {
 
   return (
     <SessionLayout session={session}>
-      <div className='font-bold text-3xl mt-4 mb-2 text-center'>
+      <div className='font-bold text-3xl mt-4 mb-2 text-center underline decoration-red-300'>
         {playlist?.name}
       </div>
-      <div>
-        {playlist && playlist2 && session && (
-          <div>
-            <IdsFeatureRadar
-              ids={playlist.tracks.items.map((item) => item.track.id)}
-              ids2={playlist2.tracks.items.map((item) => item.track.id)}
-              session={session}
-              label={playlist.name}
-              label2={playlist2.name}
-            />
+      {playlist && session && (
+        <div>
+          <IdsFeatureRadar
+            ids={playlist.tracks.items.map((item) => item.track.id)}
+            ids2={playlist2?.tracks.items.map((item) => item.track.id)}
+            session={session}
+            label={playlist.name}
+            label2={playlist2?.name}
+          />
+        </div>
+      )}
+      {playlist && (
+        <div>
+          <div className='font-bold text-3xl mt-4 mb-2 underline decoration-blue-300'>
+            Tracks
           </div>
-        )}
-        {playlist &&
-          playlist.tracks.items.map((item, index) => (
+          {playlist.tracks.items.map((item, index) => (
             <Link href={`/audio-features/${item.track.id}`} key={item.track.id}>
               <div className='flex justify-between border rounded p-2 bg-cyan-50'>
                 <div className='font-bold text-lg'>
@@ -45,7 +48,8 @@ const Home: NextPage = () => {
               </div>
             </Link>
           ))}
-      </div>
+        </div>
+      )}
     </SessionLayout>
   );
 };

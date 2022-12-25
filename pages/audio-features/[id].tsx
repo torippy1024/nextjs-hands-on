@@ -17,11 +17,11 @@ const Home: NextPage = () => {
 
   return (
     <SessionLayout session={session}>
-      <div className='font-bold text-3xl mt-4 mb-2 text-center'>
+      <div className='font-bold text-3xl mt-4 mb-2 text-center underline decoration-red-300'>
         {track?.name}
       </div>
-      <div>
-        {playlist && track && id && (
+      {playlist && track && id && (
+        <div>
           <IdsFeatureRadar
             ids={[id as string]}
             ids2={playlist.tracks.items.map((item) => item.track.id)}
@@ -29,8 +29,8 @@ const Home: NextPage = () => {
             label={track.name}
             label2={playlist.name}
           />
-        )}
-      </div>
+        </div>
+      )}
     </SessionLayout>
   );
 };

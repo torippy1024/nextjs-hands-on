@@ -14,17 +14,6 @@ const SessionLayout = ({children, session}: SessionLayoutType) => {
       headerElements={[
         {session} ? (
           <button
-            key='signIn'
-            className='btn mr-2'
-            onClick={(e) => {
-              e.preventDefault();
-              signIn();
-            }}
-          >
-            sign in
-          </button>
-        ) : (
-          <button
             key='signOut'
             className='btn mr-2'
             onClick={(e) => {
@@ -33,6 +22,17 @@ const SessionLayout = ({children, session}: SessionLayoutType) => {
             }}
           >
             sign out
+          </button>
+        ) : (
+          <button
+            key='signIn'
+            className='btn mr-2'
+            onClick={(e) => {
+              e.preventDefault();
+              signIn();
+            }}
+          >
+            sign in
           </button>
         ),
       ]}

@@ -18,16 +18,57 @@ ChartJS.register(
   Legend,
 );
 
-type FeatureRadarType = {
-  acousticness: number;
-  danceability: number;
-  energy: number;
-  liveness: number;
-  speechiness: number;
-  valence: number;
+const backgroundAlpha = 0.2;
+const borderAlpha = 1;
+const mainColorValue = 255;
+const subColorValue = 50;
+
+export const FeatureRadarColor = {
+  DEFAULT: {
+    backgroundColor: `rgba(${mainColorValue}, ${subColorValue}, ${subColorValue}, ${backgroundAlpha})`,
+    borderColor: `rgba(${mainColorValue}, ${subColorValue}, ${subColorValue}, ${borderAlpha})`,
+  },
+  RED: {
+    backgroundColor: `rgba(${mainColorValue}, ${subColorValue}, ${subColorValue}, ${backgroundAlpha})`,
+    borderColor: `rgba(${mainColorValue}, ${subColorValue}, ${subColorValue}, ${borderAlpha})`,
+  },
+  GREEN: {
+    backgroundColor: `rgba(${subColorValue}, ${mainColorValue}, ${subColorValue}, ${backgroundAlpha})`,
+    borderColor: `rgba(${subColorValue}, ${mainColorValue}, ${subColorValue}, ${borderAlpha})`,
+  },
+  BLUE: {
+    backgroundColor: `rgba(${subColorValue}, ${subColorValue}, ${mainColorValue}, ${backgroundAlpha})`,
+    borderColor: `rgba(${subColorValue}, ${subColorValue}, ${mainColorValue}, ${borderAlpha})`,
+  },
 };
 
-const FeatureRadar = (props: FeatureRadarType) => {
+export type FeatureRadarColorType = {
+  [key: string]: {
+    backgroundColor: string;
+    borderColor: string;
+  };
+};
+
+type FeatureRadarType = {
+  datasets: {
+    label?: string;
+    data: {
+      acousticness: number;
+      danceability: number;
+      energy: number;
+      liveness: number;
+      speechiness: number;
+      valence: number;
+    };
+    color?: {
+      backgroundColor: string;
+      borderColor: string;
+    };
+    borderWidth?: number;
+  }[];
+};
+
+const FeatureRadar = ({datasets}: FeatureRadarType) => {
   return (
     <Radar
       data={{
@@ -39,22 +80,26 @@ const FeatureRadar = (props: FeatureRadarType) => {
           'speechiness',
           'valence',
         ],
-        datasets: [
-          {
-            label: 'Audio Feature',
+        datasets: datasets.map((dataset) => {
+          return {
+            label: dataset.label ?? 'Audio Feature',
             data: [
-              props.acousticness,
-              props.danceability,
-              props.energy,
-              props.liveness,
-              props.speechiness,
-              props.valence,
+              dataset.data.acousticness,
+              dataset.data.danceability,
+              dataset.data.energy,
+              dataset.data.liveness,
+              dataset.data.speechiness,
+              dataset.data.valence,
             ],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1,
-          },
-        ],
+            backgroundColor:
+              dataset.color?.backgroundColor ??
+              FeatureRadarColor.DEFAULT.backgroundColor,
+            borderColor:
+              dataset.color?.borderColor ??
+              FeatureRadarColor.DEFAULT.borderColor,
+            borderWidth: dataset.borderWidth ?? 1,
+          };
+        }),
       }}
       options={{
         scales: {

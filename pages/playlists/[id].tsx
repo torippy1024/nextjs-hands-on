@@ -13,6 +13,7 @@ const Home: NextPage = () => {
   const {id} = router.query;
 
   const {playlist} = usePlaylist(id, session);
+  const {playlist: playlist2} = usePlaylist('37i9dQZF1DX9vYRBO9gjDe', session);
 
   return (
     <SessionLayout session={session}>
@@ -20,11 +21,14 @@ const Home: NextPage = () => {
         {playlist?.name}
       </div>
       <div>
-        {playlist && session && (
+        {playlist && playlist2 && session && (
           <div>
             <IdsFeatureRadar
               ids={playlist.tracks.items.map((item) => item.track.id)}
+              ids2={playlist2.tracks.items.map((item) => item.track.id)}
               session={session}
+              label={playlist.name}
+              label2={playlist2.name}
             />
           </div>
         )}

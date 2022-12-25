@@ -12,7 +12,7 @@ const SessionLayout = ({children, session}: SessionLayoutType) => {
   return (
     <Layout
       headerElements={[
-        {session} ? (
+        session ? (
           <button
             key='signOut'
             className='btn mr-2'

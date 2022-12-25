@@ -12,19 +12,22 @@ const Home: NextPage = () => {
   return (
     <SessionLayout session={session}>
       <div className='my-4'>
-        <div className='font-bold text-3xl mt-4 mb-2 underline decoration-orange-300'>
-          Your Playlists
-        </div>
-        {playlists &&
-          playlists.items.map((playlist, index) => (
-            <Link href={`/playlists/${playlist.id}`} key={playlist.id}>
-              <div className='flex justify-between border rounded p-2 bg-orange-50'>
-                <div className='font-bold text-lg'>{playlist.name}</div>
-                <div>{playlist.tracks.total} 曲</div>
-              </div>
-              {/* <img src={playlist.imageUrl} /> */}
-            </Link>
-          ))}
+        {playlists && (
+          <div>
+            <div className='font-bold text-3xl mt-4 mb-2 underline decoration-orange-300'>
+              Your Playlists
+            </div>
+            {playlists.items.map((playlist, index) => (
+              <Link href={`/playlists/${playlist.id}`} key={playlist.id}>
+                <div className='flex justify-between border rounded p-2 bg-orange-50'>
+                  <div className='font-bold text-lg'>{playlist.name}</div>
+                  <div>{playlist.tracks.total} 曲</div>
+                </div>
+                {/* <img src={playlist.imageUrl} /> */}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </SessionLayout>
   );

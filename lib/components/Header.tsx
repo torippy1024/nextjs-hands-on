@@ -1,22 +1,21 @@
 import Head from 'next/head';
 import {AiOutlineDown, AiOutlineMenu} from 'react-icons/ai';
 
+type HeaderType = {
+  elements: JSX.Element[];
+};
+
 type MenuType = {
   horizontal: boolean;
 };
 
-const Header = () => {
+const Header = ({elements}: HeaderType) => {
   const baseUrl = '/nextjs-hands-on';
   const Menu = ({horizontal}: MenuType) => (
     <ul
       className={`menu ${horizontal ? 'menu-horizontal' : 'bg-base-200'} p-0`}
     >
-      <li>
-        <a>hoge1</a>
-      </li>
-      <li>
-        <a>hoge2</a>
-      </li>
+      {elements}
     </ul>
   );
 

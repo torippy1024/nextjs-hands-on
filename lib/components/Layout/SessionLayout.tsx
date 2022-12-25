@@ -10,12 +10,12 @@ type SessionLayoutType = {
 
 const SessionLayout = ({children, session}: SessionLayoutType) => {
   return (
-    <Layout>
-      {!session && (
-        <div>
-          <div>not signed in...</div>
+    <Layout
+      headerElements={[
+        {session} ? (
           <button
-            className='btn'
+            key='signIn'
+            className='btn mr-2'
             onClick={(e) => {
               e.preventDefault();
               signIn();
@@ -23,13 +23,10 @@ const SessionLayout = ({children, session}: SessionLayoutType) => {
           >
             sign in
           </button>
-        </div>
-      )}
-      {session && (
-        <div>
-          <div>signed in as {session.user?.name}</div>
+        ) : (
           <button
-            className='btn'
+            key='signOut'
+            className='btn mr-2'
             onClick={(e) => {
               e.preventDefault();
               signOut();
@@ -37,8 +34,9 @@ const SessionLayout = ({children, session}: SessionLayoutType) => {
           >
             sign out
           </button>
-        </div>
-      )}
+        ),
+      ]}
+    >
       {children}
     </Layout>
   );

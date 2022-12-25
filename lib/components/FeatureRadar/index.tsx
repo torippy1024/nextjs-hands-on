@@ -57,7 +57,7 @@ type FeatureRadarType = {
       danceability: number;
       energy: number;
       liveness: number;
-      speechiness: number;
+      tempo: number;
       valence: number;
     };
     color?: {
@@ -73,12 +73,12 @@ const FeatureRadar = ({datasets}: FeatureRadarType) => {
     <Radar
       data={{
         labels: [
-          'acousticness',
-          'danceability',
-          'energy',
-          'liveness',
-          'speechiness',
-          'valence',
+          'アコースティック感',
+          'ダンス感',
+          'エナジー',
+          'ライブ感',
+          'BPM',
+          '明るさ',
         ],
         datasets: datasets.map((dataset) => {
           return {
@@ -88,7 +88,7 @@ const FeatureRadar = ({datasets}: FeatureRadarType) => {
               dataset.data.danceability,
               dataset.data.energy,
               dataset.data.liveness,
-              dataset.data.speechiness,
+              (dataset.data.tempo - 50) / 150,
               dataset.data.valence,
             ],
             backgroundColor:
@@ -106,6 +106,35 @@ const FeatureRadar = ({datasets}: FeatureRadarType) => {
           r: {
             max: 1,
             min: 0,
+            pointLabels: {
+              font: {
+                size: 20,
+              },
+            },
+            ticks: {
+              display: false,
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 15,
+              },
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: (context) => {
+                const label = context.dataset.label || '';
+                const value =
+                  context.label === 'BPM'
+                    ? Math.round(context.parsed.r * 150 + 50)
+                    : Math.round(context.parsed.r * 100) / 100;
+                return `${label}: ${value}`;
+              },
+            },
           },
         },
       }}

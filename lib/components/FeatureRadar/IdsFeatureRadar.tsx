@@ -26,8 +26,7 @@ const audioFeatureToData = (
     energy: features.reduce((sum, feature) => sum + feature.energy, 0) / length,
     liveness:
       features.reduce((sum, feature) => sum + feature.liveness, 0) / length,
-    speechiness:
-      features.reduce((sum, feature) => sum + feature.speechiness, 0) / length,
+    tempo: features.reduce((sum, feature) => sum + feature.tempo, 0) / length,
     valence:
       features.reduce((sum, feature) => sum + feature.acousticness, 0) / length,
   };

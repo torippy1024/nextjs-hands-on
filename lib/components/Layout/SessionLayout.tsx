@@ -29,7 +29,7 @@ const SessionLayout = ({children, session}: SessionLayoutType) => {
             className='btn mr-2'
             onClick={(e) => {
               e.preventDefault();
-              signIn();
+              signIn('spotify');
             }}
           >
             sign in

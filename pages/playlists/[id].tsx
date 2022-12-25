@@ -38,7 +38,7 @@ const Home: NextPage = () => {
           </div>
           {playlist.tracks.items.map((item, index) => (
             <Link href={`/audio-features/${item.track.id}`} key={item.track.id}>
-              <div className='flex justify-between border rounded p-2 bg-cyan-50'>
+              <div className='flex justify-between border rounded p-2 bg-cyan-50 hover:bg-blue-200 hover:border-blue-500'>
                 <div className='font-bold text-lg'>
                   {index + 1}: {item.track.name}
                 </div>

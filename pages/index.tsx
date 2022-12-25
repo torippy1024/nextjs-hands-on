@@ -19,7 +19,7 @@ const Home: NextPage = () => {
             </div>
             {playlists.items.map((playlist, index) => (
               <Link href={`/playlists/${playlist.id}`} key={playlist.id}>
-                <div className='flex justify-between border rounded p-2 bg-orange-50'>
+                <div className='flex justify-between border rounded p-2 bg-orange-50 hover:bg-orange-200 hover:border-orange-500'>
                   <div className='font-bold text-lg'>{playlist.name}</div>
                   <div>{playlist.tracks.total} 曲</div>
                 </div>

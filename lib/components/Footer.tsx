@@ -6,9 +6,15 @@ const Footer = () => {
       <div className='items-center grid-flow-col'>
         <AiFillCalculator size={32} />
         <p>Copyright © 2022 - All right reserved</p>
-      </div> 
+      </div>
       <div className='grid-flow-col gap-4 md:place-self-center md:justify-self-end'>
-        <a href='https://github.com/torippy1024' target='_blank' rel='noopener noreferrer'><AiFillGithub size={24} /></a>
+        <a
+          href='https://github.com/torippy1024'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <AiFillGithub size={24} />
+        </a>
       </div>
     </footer>
   );

@@ -3,7 +3,6 @@ import {useSession} from 'next-auth/react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import SessionLayout from '../lib/components/Layout/SessionLayout';
-import SearchBox from '../lib/components/SearchBox';
 import useMePlaylists from '../lib/hooks/useMePlaylists';
 
 const Home: NextPage = () => {

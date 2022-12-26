@@ -1,31 +1,35 @@
 import {Session} from 'next-auth';
-import validateSpotifyPlaylists from '../types/spotify/playlists/ids.validator';
+import validateSpotifyMix from '../types/spotify/mix/index.validator';
 import useSpotifyFetchData from './useSpotifyFetchData';
 
-const useMePlaylists = (
+const useSearch = (
   session: Session | null,
-  page: number = 0,
-  limit: number = 50,
+  q: string | string[] | undefined,
+  limit: number = 20,
+  offset: number = 0,
+  type: string[] = ['track'],
 ) => {
   const {
-    data: playlists,
+    data: mix,
     error,
     isLoading,
     isValidating,
     mutate,
   } = useSpotifyFetchData({
-    baseUrl: '/api/spotify/me/playlists',
+    baseUrl: '/api/spotify/search',
     params: {
       accessToken: session?.token.accessToken || '',
-      page: String(page),
+      q: String(q) || '',
       limit: String(limit),
+      offset: String(offset),
+      type: type.join(','),
     },
-    validate: validateSpotifyPlaylists,
+    validate: validateSpotifyMix,
     isReady: Boolean(session && session.token.accessToken),
   });
 
   return {
-    playlists,
+    mix,
     error,
     isLoading,
     isValidating,
@@ -33,4 +37,4 @@ const useMePlaylists = (
   };
 };
 
-export default useMePlaylists;
+export default useSearch;

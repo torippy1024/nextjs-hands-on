@@ -1,16 +1,20 @@
 import type {NextPage} from 'next';
 import {useSession} from 'next-auth/react';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 import SessionLayout from '../lib/components/Layout/SessionLayout';
+import SearchBox from '../lib/components/SearchBox';
 import useMePlaylists from '../lib/hooks/useMePlaylists';
 
 const Home: NextPage = () => {
   const {data: session} = useSession();
 
+  const router = useRouter();
+
   const {playlists} = useMePlaylists(session);
 
   return (
-    <SessionLayout session={session}>
+    <SessionLayout session={session} router={router}>
       <div className='my-4'>
         {playlists && (
           <div>

@@ -10,7 +10,7 @@ export default interface SpotifyPlaylistType {
   images: SpotifyPlaylistImageType[];
   name: string;
   owner: SpotifyPlaylistOwnerType;
-  public: boolean;
+  public: boolean | null;
   snapshot_id: string;
   tracks: SpotifyPlaylistTracksType;
   type: string;
@@ -43,13 +43,13 @@ export interface SpotifyPlaylistOwnerType {
 }
 
 export interface SpotifyPlaylistTracksType {
-  href: string;
-  items: SpotifyPlaylistItemType[];
-  limit: number;
-  next: string | null;
-  offset: number;
-  previous: string | null;
-  total: number;
+  href?: string;
+  items?: SpotifyPlaylistItemType[];
+  limit?: number;
+  next?: string | null;
+  offset?: number;
+  previous?: string | null;
+  total?: number;
 }
 
 export interface SpotifyPlaylistItemType {

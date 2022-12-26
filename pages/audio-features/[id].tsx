@@ -16,11 +16,11 @@ const Home: NextPage = () => {
   const {playlist} = usePlaylist('37i9dQZF1DX9vYRBO9gjDe', session);
 
   return (
-    <SessionLayout session={session}>
+    <SessionLayout session={session} router={router}>
       <div className='font-bold text-3xl mt-4 mb-2 text-center underline decoration-red-300'>
         {track?.name}
       </div>
-      {playlist && track && id && (
+      {playlist && track && id && playlist.tracks.items && (
         <div>
           <IdsFeatureRadar
             ids={[id as string]}

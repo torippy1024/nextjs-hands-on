@@ -1,14 +1,17 @@
 import {Session} from 'next-auth';
 import {signIn, signOut} from 'next-auth/react';
+import {NextRouter} from 'next/router';
 import {ReactNode} from 'react';
 import Layout from '.';
+import SearchBox from '../SearchBox';
 
 type SessionLayoutType = {
   children: ReactNode;
   session: Session | null;
+  router: NextRouter;
 };
 
-const SessionLayout = ({children, session}: SessionLayoutType) => {
+const SessionLayout = ({children, session, router}: SessionLayoutType) => {
   return (
     <Layout
       headerElements={[
@@ -37,6 +40,7 @@ const SessionLayout = ({children, session}: SessionLayoutType) => {
         ),
       ]}
     >
+      {router && <SearchBox router={router} />}
       {children}
     </Layout>
   );

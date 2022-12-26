@@ -16,15 +16,15 @@ const Home: NextPage = () => {
   const {playlist: playlist2} = usePlaylist('37i9dQZF1DX9vYRBO9gjDe', session);
 
   return (
-    <SessionLayout session={session}>
+    <SessionLayout session={session} router={router}>
       <div className='font-bold text-3xl mt-4 mb-2 text-center underline decoration-red-300'>
         {playlist?.name}
       </div>
-      {playlist && session && (
+      {playlist && session && playlist.tracks.items && (
         <div>
           <IdsFeatureRadar
-            ids={playlist.tracks.items.map((item) => item.track.id)}
-            ids2={playlist2?.tracks.items.map((item) => item.track.id)}
+            ids={playlist.tracks.items?.map((item) => item.track.id)}
+            ids2={playlist2?.tracks.items?.map((item) => item.track.id)}
             session={session}
             label={playlist.name}
             label2={playlist2?.name}
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
           <div className='font-bold text-3xl mt-4 mb-2 underline decoration-blue-300'>
             Tracks
           </div>
-          {playlist.tracks.items.map((item, index) => (
+          {playlist.tracks.items?.map((item, index) => (
             <Link href={`/audio-features/${item.track.id}`} key={item.track.id}>
               <div className='flex justify-between border rounded p-2 bg-cyan-50 hover:bg-blue-200 hover:border-blue-500'>
                 <div className='font-bold text-lg'>

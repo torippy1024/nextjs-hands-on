@@ -68,6 +68,7 @@ export const authOptions: NextAuthOptions = {
       authorization: `https://accounts.spotify.com/authorize?scope=${scope.join()}`,
     }),
   ],
+  secret: process.env.SPOTIFY_CLIENT_SECRET || '',
   callbacks: {
     async jwt({token, account}) {
       if (account) {

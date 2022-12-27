@@ -25,9 +25,8 @@ const SearchBox = ({router}: SearchBoxType) => {
           type='text'
           className='border-2 px-2'
           value={input}
-          placeholder='Search…'
+          placeholder='曲を検索…'
           onChange={(e) => setInput(e.target.value)}
-          onSubmit={() => alert('hoge')}
         />
         <button className='btn btn-square'>
           <svg

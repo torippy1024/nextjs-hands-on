@@ -3,6 +3,7 @@ import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/router';
 import IdsFeatureRadar from '../../lib/components/FeatureRadar/IdsFeatureRadar';
 import SessionLayout from '../../lib/components/Layout/SessionLayout';
+import SpotifyEmbedded from '../../lib/components/SpotifyEmbedded';
 import usePlaylist from '../../lib/hooks/usePlaylist';
 import useTrack from '../../lib/hooks/useTrack';
 
@@ -29,6 +30,7 @@ const Home: NextPage = () => {
             label={track.name}
             label2={playlist.name}
           />
+          <SpotifyEmbedded id={id as string} />
         </div>
       )}
     </SessionLayout>

@@ -40,7 +40,7 @@ const SessionLayout = ({children, session, router}: SessionLayoutType) => {
         ),
       ]}
     >
-      {router && <SearchBox router={router} />}
+      {session && <SearchBox router={router} />}
       {children}
     </Layout>
   );

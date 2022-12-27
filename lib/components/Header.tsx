@@ -29,7 +29,7 @@ const Header = ({elements}: HeaderType) => {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </Head>
       <div className='navbar bg-base-200'>
-        <div className='md:hidden flex-none'>
+        {/* <div className='md:hidden flex-none'>
           <ul className='menu menu-horizontal p-0 bg-base-200'>
             <li tabIndex={0} className='z-10'>
               <a>
@@ -38,13 +38,13 @@ const Header = ({elements}: HeaderType) => {
               <Menu horizontal={false} />
             </li>
           </ul>
-        </div>
+        </div> */}
         <div className='flex-1'>
           <Link href={'/'} className='btn btn-ghost normal-case text-xl'>
             Spotify Analytics
           </Link>
         </div>
-        <div className='hidden md:block flex-none'>
+        <div className='flex-none'>
           <ul className='menu menu-horizontal p-0'>
             <Menu horizontal={true} />
           </ul>
